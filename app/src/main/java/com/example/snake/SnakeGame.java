@@ -231,10 +231,10 @@ public class SnakeGame extends SurfaceView implements Runnable {
 
 
             // Fill the screen with a color
-            mCanvas.drawColor(Color.GRAY);
+            mCanvas.drawColor(Color.argb(255,100,200,100));
 
             // Set the size and color of the mPaint for the text
-            mPaint.setColor(Color.argb(255, 255, 255, 255));
+            mPaint.setColor(Color.argb(255, 0, 0, 0));
             mPaint.setTextSize(50);
 
 
@@ -251,7 +251,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
             if(mPaused){
 
                 // Set the size and color of the mPaint for the text
-                mPaint.setColor(Color.argb(255, 255, 255, 255));
+                mPaint.setColor(Color.argb(255, 0, 0, 0));
                 mPaint.setTextSize(250);
 
                 // Draw the message
