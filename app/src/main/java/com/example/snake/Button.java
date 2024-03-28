@@ -29,8 +29,8 @@ public class Button implements Drawable {
     private volatile boolean mPlaying = false;
 
 
-    int x = 200;
-    int y = 20;
+    float x = 200;
+    float y = 20;
 
     /// Set up the apple in the constructor
     Button(Context context, Point sr, int s, int width, int height){
@@ -38,10 +38,14 @@ public class Button implements Drawable {
         buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
         // Resize the bitmap
         buttonBitmap = Bitmap.createScaledBitmap(buttonBitmap, width, height, false);
-
-
     }
 
+    Button(Context context, Point sr, int s, float width, float height){
+        // Load the image to the bitmap
+        buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
+        // Resize the bitmap
+        buttonBitmap = Bitmap.createScaledBitmap(buttonBitmap, (int)width, (int)height, false);
+    }
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(buttonBitmap, x, y, paint);

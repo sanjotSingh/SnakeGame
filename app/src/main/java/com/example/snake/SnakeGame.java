@@ -128,9 +128,9 @@ public class SnakeGame extends SurfaceView implements Runnable {
 
 
         // Set button position (example: center of the screen)
-        int buttonX = mButton.x;
-        int buttonY = mButton.y;
-        buttonRect = new Rect(buttonX, buttonY, buttonX + buttonWidth, buttonY + buttonHeight);
+        float buttonX = mButton.x;
+        float buttonY = mButton.y;
+        buttonRect = new Rect((int)buttonX, (int)buttonY, (int)buttonX + buttonWidth, (int)buttonY + buttonHeight);
 
     }
 
