@@ -61,7 +61,8 @@ public class SnakeGame extends SurfaceView implements Runnable {
 
 
     private boolean isPaused = true;
-
+    private final int buttonWidth = 200; // Adjust button width as needed
+    private final int buttonHeight = 100; // Adjust button height as needed
 
     // This is the constructor method that gets called
     // from SnakeActivity
@@ -73,7 +74,39 @@ public class SnakeGame extends SurfaceView implements Runnable {
         // How many blocks of the same size will fit into the height
         mNumBlocksHigh = size.y / blockSize;
 
-        // Initialize the SoundPool
+        setUpSound(context);
+
+        // Initialize the drawing objects
+        mSurfaceHolder = getHolder();
+        mPaint = new Paint();
+
+        // Call the constructors of our three game objects
+        mApple = new Apple(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize);
+
+        mSnake = new Snake(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize);
+
+
+        mButton = new Button(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize, buttonWidth,buttonHeight);
+
+
+        // Set button position (example: center of the screen)
+        float buttonX = mButton.x;
+        float buttonY = mButton.y;
+        buttonRect = new Rect((int)mButton.x, (int)mButton.y, (int)mButton.x + buttonWidth, (int)mButton.y + buttonHeight);
+
+    }
+
+    public void setUpSound(Context context){
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_MEDIA)
@@ -101,45 +134,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
         } catch (IOException e) {
             // Error
         }
-
-
-        // Initialize the drawing objects
-        mSurfaceHolder = getHolder();
-        mPaint = new Paint();
-
-
-        // Call the constructors of our two game objects
-        mApple = new Apple(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
-
-        mSnake = new Snake(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
-
-        int buttonWidth = 200; // Adjust button width as needed
-        int buttonHeight = 100; // Adjust button height as needed
-        mButton = new Button(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize, buttonWidth,buttonHeight);
-
-
-
-
-
-        // Set button position (example: center of the screen)
-        float buttonX = mButton.x;
-        float buttonY = mButton.y;
-        buttonRect = new Rect((int)buttonX, (int)buttonY, (int)buttonX + buttonWidth, (int)buttonY + buttonHeight);
-
-
-
-
     }
-
 
     // Called to start a new game
     public void newGame() {

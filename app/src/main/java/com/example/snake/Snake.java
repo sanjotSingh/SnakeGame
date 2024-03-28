@@ -237,20 +237,6 @@ class Snake implements Drawable{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Handle changing direction
     void switchHeading(MotionEvent motionEvent) {
 
