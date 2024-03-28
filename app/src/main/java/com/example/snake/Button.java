@@ -12,7 +12,9 @@ import android.view.MotionEvent;
 
 import java.util.Random;
 
-public class Button {
+public class Button implements Drawable {
+
+
     // The location of the apple on the grid
     // Not in pixels
     private Point location = new Point();

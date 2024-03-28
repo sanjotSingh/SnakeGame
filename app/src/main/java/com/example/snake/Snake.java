@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake {
+class Snake implements Drawable{
 
     // The location in the grid of all the segments
     private ArrayList<Point> segmentLocations;
@@ -196,7 +196,7 @@ class Snake {
     }
 
 
-    void draw(Canvas canvas, Paint paint) {
+    public void draw(Canvas canvas, Paint paint) {
         if (!segmentLocations.isEmpty()) {
             drawHead(canvas, paint);
             drawBody(canvas, paint);
