@@ -243,8 +243,8 @@ public class SnakeGame extends SurfaceView implements Runnable {
             mPaint.setColor(Color.argb(255, 0, 0, 0));
             mPaint.setTextSize(50);
 
-            Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "font/TacOne-Regular.ttf");
-            mPaint.setTypeface(typeface);
+            Typeface font = Typeface.createFromAsset(getContext().getAssets(), "font/TacOne-Regular.ttf");
+            mPaint.setTypeface(font);
 
 
 
