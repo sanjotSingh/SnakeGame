@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 
 import java.util.Random;
 
-public class Button implements Drawable {
+public class Button extends Object implements Drawable {
 
 
     // The location of the apple on the grid
@@ -29,6 +29,7 @@ public class Button implements Drawable {
 
     /// Set up the apple in the constructor
     Button(Context context, Point sr, int s, int width, int height){
+        super();
         // Load the image to the bitmap
         buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
         // Resize the bitmap
@@ -36,6 +37,7 @@ public class Button implements Drawable {
     }
 
     Button(Context context, Point sr, int s, float width, float height){
+        super();
         // Load the image to the bitmap
         buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
         // Resize the bitmap

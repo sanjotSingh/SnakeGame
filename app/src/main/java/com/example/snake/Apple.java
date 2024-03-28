@@ -10,7 +10,7 @@ import android.widget.ToggleButton;
 
 import java.util.Random;
 
-class Apple implements Drawable{
+class Apple extends Object implements Drawable {
 
     // The location of the apple on the grid
     // Not in pixels
@@ -26,6 +26,7 @@ class Apple implements Drawable{
 
     /// Set up the apple in the constructor
     Apple(Context context, Point sr, int s){
+        super();
 
         // Make a note of the passed in spawn range
         mSpawnRange = sr;
