@@ -28,7 +28,7 @@ public class Button {
 
 
     int x = 200;
-    int y = 40;
+    int y = 20;
 
     /// Set up the apple in the constructor
     Button(Context context, Point sr, int s, int width, int height){
