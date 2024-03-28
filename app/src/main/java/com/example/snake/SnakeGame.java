@@ -46,7 +46,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
     private SurfaceHolder mSurfaceHolder;
     private Paint mPaint;
 
-    // A snake ssss
+
     private Snake mSnake;
     // And an apple
     private Apple mApple;
@@ -229,15 +229,18 @@ public class SnakeGame extends SurfaceView implements Runnable {
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
 
+
             // Fill the screen with a color
             mCanvas.drawColor(Color.GRAY);
 
             // Set the size and color of the mPaint for the text
             mPaint.setColor(Color.argb(255, 255, 255, 255));
-            mPaint.setTextSize(120);
+            mPaint.setTextSize(50);
+
+
 
             // Draw the score
-            mCanvas.drawText("" + mScore, 20, 120, mPaint);
+            mCanvas.drawText("" + mScore, 20, 80, mPaint);
 
             // Draw the apple and the snake
             mApple.draw(mCanvas, mPaint);
@@ -254,6 +257,11 @@ public class SnakeGame extends SurfaceView implements Runnable {
                 // Draw the message
                 // We will give this an international upgrade soon
                 mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
+
+                mPaint.setTextSize(50);
+
+                mCanvas.drawText("Arshmit Bains", 1880, 80, mPaint);
+                mCanvas.drawText("Sanjot Chandi", 1540, 80, mPaint);
             }
 
 
