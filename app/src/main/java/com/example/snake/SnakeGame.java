@@ -295,7 +295,8 @@ public class SnakeGame extends SurfaceView implements Runnable {
                 }
 
 
-                    // If not paused, Let the Snake class handle the input
+
+                    // Let the Snake class handle the input
                 mSnake.switchHeading(motionEvent);
 
                 break;
