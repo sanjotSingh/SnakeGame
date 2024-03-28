@@ -22,11 +22,6 @@ public class Button implements Drawable {
     // An image to represent the button
     private Bitmap buttonBitmap;
 
-    // Objects for the game loop/thread
-    private Thread mThread = null;
-
-    // Is the game currently playing and or paused?
-    private volatile boolean mPlaying = false;
 
 
     float x = 200;
@@ -49,6 +44,11 @@ public class Button implements Drawable {
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(buttonBitmap, x, y, paint);
+
+    }
+
+    void pause(MotionEvent motionEvent) {
+
 
     }
 

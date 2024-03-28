@@ -40,7 +40,6 @@ class Snake implements Drawable{
     private Bitmap mBitmapHeadUp;
     private Bitmap mBitmapHeadDown;
 
-    private Bitmap nBitmapHead;
     // A bitmap for the body
     private Bitmap mBitmapBody;
 
@@ -102,6 +101,7 @@ class Snake implements Drawable{
         // Used to detect which side of screen was pressed
         halfWayPoint = mr.x * ss / 2;
     }
+
 
     // Get the snake ready for a new game
     void reset(int w, int h) {
