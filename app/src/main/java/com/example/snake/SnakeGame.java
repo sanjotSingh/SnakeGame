@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
+import android.graphics.Typeface;
 
 public class SnakeGame extends SurfaceView implements Runnable {
 
@@ -101,9 +102,11 @@ public class SnakeGame extends SurfaceView implements Runnable {
             // Error
         }
 
+
         // Initialize the drawing objects
         mSurfaceHolder = getHolder();
         mPaint = new Paint();
+
 
         // Call the constructors of our two game objects
         mApple = new Apple(context,
@@ -131,6 +134,9 @@ public class SnakeGame extends SurfaceView implements Runnable {
         float buttonX = mButton.x;
         float buttonY = mButton.y;
         buttonRect = new Rect((int)buttonX, (int)buttonY, (int)buttonX + buttonWidth, (int)buttonY + buttonHeight);
+
+
+
 
     }
 
@@ -237,6 +243,9 @@ public class SnakeGame extends SurfaceView implements Runnable {
             mPaint.setColor(Color.argb(255, 0, 0, 0));
             mPaint.setTextSize(50);
 
+            Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "font/TacOne-Regular.ttf");
+            mPaint.setTypeface(typeface);
+
 
 
             // Draw the score
@@ -259,7 +268,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
                 mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
 
                 mPaint.setTextSize(50);
-
+// Inputing names
                 mCanvas.drawText("Arshmit Bains", 1880, 80, mPaint);
                 mCanvas.drawText("Sanjot Chandi", 1540, 80, mPaint);
             }
