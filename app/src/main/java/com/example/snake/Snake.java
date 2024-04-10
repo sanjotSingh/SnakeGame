@@ -57,7 +57,7 @@ class Snake implements Drawable{
         // Create and scale the bitmaps
         mBitmapHeadRight = BitmapFactory
                 .decodeResource(context.getResources(),
-                        R.drawable.head);
+                        R.drawable.car8);
 
 
 
@@ -91,7 +91,7 @@ class Snake implements Drawable{
         // Create and scale the body
         mBitmapBody = BitmapFactory
                 .decodeResource(context.getResources(),
-                        R.drawable.body);
+                        R.drawable.nitro1);
 
         mBitmapBody = Bitmap
                 .createScaledBitmap(mBitmapBody,
