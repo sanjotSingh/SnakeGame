@@ -26,6 +26,8 @@ public class CarGame extends SurfaceView implements Runnable {
     private volatile boolean mPlaying = false;
     private volatile boolean mPaused = true;
 
+    private Audio mAudio;
+
     // for playing sound effects
     private SoundPool mSP;
     private int mEat_ID = -1;
@@ -63,6 +65,8 @@ public class CarGame extends SurfaceView implements Runnable {
     // from CarActivity
     public CarGame(Context context, Point size) {
         super(context);
+
+        mAudio = new Audio(context);
 
         // Work out how many pixels each block is
         blockSize = size.x / NUM_BLOCKS_WIDE;
@@ -208,13 +212,13 @@ public class CarGame extends SurfaceView implements Runnable {
             mScore = mScore + 1;
 
             // Play a sound
-            mSP.play(mEat_ID, 1, 1, 0, 0, 1);
+            mAudio.playEatSound(); // When the snake eats the apple
         }
 
         // Did the snake die?
         if (mCar.detectDeath()) {
             // Pause the game ready to start again
-            mSP.play(mCrashID, 1, 1, 0, 0, 1);
+            mAudio.playCrashSound(); // When the snake crashes
 
             mPaused =true;
         }

@@ -9,7 +9,6 @@ public class PowerUp extends Object {
     // Constructor
     public PowerUp(Point location, int type) {
         super();
-        this.location = location;
         this.type = type;
         this.active = false;
     }
@@ -31,7 +30,7 @@ public class PowerUp extends Object {
     }
 
     // Method to apply the effect of the power-up
-    public void applyEffect(Snake snake) {
+    public void applyEffect(Car car) {
         // Implement effect logic here, e.g., increase speed, extend length, etc.
     }
 }
