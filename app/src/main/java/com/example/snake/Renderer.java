@@ -4,13 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+
 public class Renderer extends SurfaceView {
-    private SnakeGame snakeGame;
+    private CarGame carGame;
     // Objects for drawing
     private Canvas mCanvas;
     private Paint mPaint;
@@ -32,36 +30,37 @@ public class Renderer extends SurfaceView {
 
 
 
-    public void draw(Apple mApple, Snake mSnake, Button mButton, int mScore,Boolean mPaused) {
+    public void draw(Fuel mFuel, Car mCar, Button mButton, int mScore, Boolean mPaused) {
         // Get a lock on the mCanvas
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
 
 
-            // Fill the screen with a color
+            // Set Background color
             mCanvas.drawColor(Color.argb(255,100,200,100));
 
             // Set the size and color of the mPaint for the text
             mPaint.setColor(Color.argb(255, 0, 0, 0));
             mPaint.setTextSize(50);
 
+            //set Font
             Typeface font = Typeface.createFromAsset(getContext().getAssets(), "font/TacOne-Regular.ttf");
             mPaint.setTypeface(font);
 
 
 
             // Draw the score
-            mCanvas.drawText("" + mScore, 20, 80, mPaint);
+            mCanvas.drawText("Score: " + mScore, 20, 80, mPaint);
 
-            // Draw the apple, the snake and the pause button
-            mApple.draw(mCanvas, mPaint);
-            mSnake.draw(mCanvas, mPaint);
+            // Draw the fuel, the snake and the pause button
+            mFuel.draw(mCanvas, mPaint);
+            mCar.draw(mCanvas, mPaint);
             mButton.draw(mCanvas, mPaint);
 
             // Draw some text while paused
             if(mPaused){
 
-                // Set the size and color of the mPaint for the text
+                // Set the size and color of the pause text
                 mPaint.setColor(Color.argb(255, 0, 0, 0));
                 mPaint.setTextSize(250);
 

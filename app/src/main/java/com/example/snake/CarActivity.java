@@ -8,10 +8,10 @@ import android.view.Display;
 
 
 
-public class SnakeActivity extends Activity {
+public class CarActivity extends Activity {
 
-    // Declare an instance of SnakeGame
-    SnakeGame mSnakeGame;
+    // Declare an instance of CarGame
+    CarGame mCarGame;
 
     // Set the game up
     @Override
@@ -27,10 +27,10 @@ public class SnakeActivity extends Activity {
         display.getSize(size);
 
         // Create a new instance of the SnakeEngine class
-        mSnakeGame = new SnakeGame(this, size);
+        mCarGame = new CarGame(this, size);
 
         // Make snakeEngine the view of the Activity
-        setContentView(mSnakeGame);
+        setContentView(mCarGame);
 
     }
 
@@ -38,14 +38,14 @@ public class SnakeActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        mSnakeGame.resume();
+        mCarGame.resume();
     }
 
     // Stop the thread in snakeEngine
     @Override
     protected void onPause() {
         super.onPause();
-        mSnakeGame.pause();
+        mCarGame.pause();
     }
 
 

@@ -4,9 +4,6 @@ package com.example.snake;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioAttributes;
@@ -18,9 +15,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
-import android.graphics.Typeface;
 
-public class SnakeGame extends SurfaceView implements Runnable {
+public class CarGame extends SurfaceView implements Runnable {
 
     // Objects for the game loop/thread
     private Thread mThread = null;
@@ -47,9 +43,9 @@ public class SnakeGame extends SurfaceView implements Runnable {
 
 
     private Renderer mRenderer;
-    private Snake mSnake;
+    private Car mCar;
     // And an apple
-    private Apple mApple;
+    private Fuel mApple;
 
     private Button mButton;
 
@@ -64,8 +60,8 @@ public class SnakeGame extends SurfaceView implements Runnable {
     private final int buttonHeight = 100; // Adjust button height as needed
     int blockSize;
     // This is the constructor method that gets called
-    // from SnakeActivity
-    public SnakeGame(Context context, Point size) {
+    // from CarActivity
+    public CarGame(Context context, Point size) {
         super(context);
 
         // Work out how many pixels each block is
@@ -78,12 +74,12 @@ public class SnakeGame extends SurfaceView implements Runnable {
 
 
         // Call the constructors of our three game objects
-        mApple = new Apple(context,
+        mApple = new Fuel(context,
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
 
-        mSnake = new Snake(context,
+        mCar = new Car(context,
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
@@ -141,7 +137,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
     public void newGame() {
 
         // reset the snake
-        mSnake.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
+        mCar.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
 
         // Get the apple ready for dinner
         mApple.spawn();
@@ -165,7 +161,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
                 }
             }
 
-            mRenderer.draw(mApple, mSnake,mButton, mScore, mPaused);
+            mRenderer.draw(mApple, mCar,mButton, mScore, mPaused);
         }
     }
 
@@ -200,10 +196,10 @@ public class SnakeGame extends SurfaceView implements Runnable {
     public void update() {
 
         // Move the snake
-        mSnake.move();
+        mCar.move();
 
         // Did the head of the snake eat the apple?
-        if(mSnake.checkDinner(mApple.getLocation())){
+        if(mCar.checkDinner(mApple.getLocation())){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
             mApple.spawn();
@@ -216,7 +212,7 @@ public class SnakeGame extends SurfaceView implements Runnable {
         }
 
         // Did the snake die?
-        if (mSnake.detectDeath()) {
+        if (mCar.detectDeath()) {
             // Pause the game ready to start again
             mSP.play(mCrashID, 1, 1, 0, 0, 1);
 
@@ -252,8 +248,8 @@ public class SnakeGame extends SurfaceView implements Runnable {
                     }
                     return true; // Consume touch event
                 }
-                    // Let the Snake class handle the input
-                mSnake.switchHeading(motionEvent);
+                    // Let the Car class handle the input
+                mCar.switchHeading(motionEvent);
 
                 break;
 

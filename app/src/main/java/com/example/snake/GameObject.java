@@ -1,8 +1,12 @@
 package com.example.snake;
 import android.graphics.Point;
 
-public class Object {
+public class GameObject {
     Point location;
+
+    GameObject(){
+        location = new Point(); // Initialize the location in the constructor
+    }
 
     Point getLocation(){
         return location;
@@ -12,5 +16,4 @@ public class Object {
         this.location.x = x;
         this.location.y = y;
     }
-
 }

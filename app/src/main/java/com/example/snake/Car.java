@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-class Snake implements Drawable{
+class Car implements Drawable{
 
     // The location in the grid of all the segments
     private ArrayList<Point> segmentLocations;
@@ -44,7 +44,7 @@ class Snake implements Drawable{
     private Bitmap mBitmapBody;
 
 
-    Snake(Context context, Point mr, int ss) {
+    Car(Context context, Point mr, int ss) {
 
         // Initialize our ArrayList
         segmentLocations = new ArrayList<>();

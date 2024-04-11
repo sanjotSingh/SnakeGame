@@ -6,11 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.widget.ToggleButton;
 
 import java.util.Random;
 
-class Apple extends Object implements Drawable {
+class Fuel extends GameObject implements Drawable {
 
     // The location of the apple on the grid
     // Not in pixels
@@ -22,10 +21,10 @@ class Apple extends Object implements Drawable {
     private int mSize;
 
     // An image to represent the apple
-    private Bitmap mBitmapApple;
+    private Bitmap mBitmapFuel;
 
     /// Set up the apple in the constructor
-    Apple(Context context, Point sr, int s){
+    Fuel(Context context, Point sr, int s){
         super();
 
         // Make a note of the passed in spawn range
@@ -36,10 +35,10 @@ class Apple extends Object implements Drawable {
         location.x = -10;
 
         // Load the image to the bitmap
-        mBitmapApple = BitmapFactory.decodeResource(context.getResources(), R.drawable.fuel);
+        mBitmapFuel = BitmapFactory.decodeResource(context.getResources(), R.drawable.fuel);
 
         // Resize the bitmap
-        mBitmapApple = Bitmap.createScaledBitmap(mBitmapApple, s, s, false);
+        mBitmapFuel = Bitmap.createScaledBitmap(mBitmapFuel, s, s, false);
     }
 
     // This is called every time an apple is eaten
@@ -50,15 +49,15 @@ class Apple extends Object implements Drawable {
         location.y = random.nextInt(mSpawnRange.y - 1) + 1;
     }
 
-    // Let SnakeGame know where the apple is
-    // SnakeGame can share this with the snake
+    // Let CarGame know where the apple is
+    // CarGame can share this with the snake
     Point getLocation(){
         return location;
     }
 
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
-        canvas.drawBitmap(mBitmapApple,
+        canvas.drawBitmap(mBitmapFuel,
                 location.x * mSize, location.y * mSize, paint);
 
     }
