@@ -69,9 +69,6 @@ public class Renderer extends SurfaceView {
                 mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
 
                 mPaint.setTextSize(50);
-                // Inputting names
-                mCanvas.drawText("Arshmit Bains", 1880, 80, mPaint);
-                mCanvas.drawText("Sanjot Chandi", 1540, 80, mPaint);
             }
 
 

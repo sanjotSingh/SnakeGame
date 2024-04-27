@@ -47,7 +47,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private Renderer mRenderer;
     private Car mCar;
     // And an apple
-    private Fuel mApple;
+    private Fuel mFuel;
 
     private Button mButton;
 
@@ -78,7 +78,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
 
         // Call the constructors of our three game objects
-        mApple = new Fuel(context,
+        mFuel = new Fuel(context,
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
@@ -144,7 +144,7 @@ public class CarGame extends SurfaceView implements Runnable {
         mCar.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
 
         // Get the apple ready for dinner
-        mApple.spawn();
+        mFuel.spawn();
 
         // Reset the mScore
         mScore = 0;
@@ -165,7 +165,7 @@ public class CarGame extends SurfaceView implements Runnable {
                 }
             }
 
-            mRenderer.draw(mApple, mCar,mButton, mScore, mPaused);
+            mRenderer.draw(mFuel, mCar,mButton, mScore, mPaused);
         }
     }
 
@@ -203,10 +203,10 @@ public class CarGame extends SurfaceView implements Runnable {
         mCar.move();
 
         // Did the head of the snake eat the apple?
-        if(mCar.checkDinner(mApple.getLocation())){
+        if(mCar.checkDinner(mFuel.getLocation())){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
-            mApple.spawn();
+            mFuel.spawn();
 
             // Add to  mScore
             mScore = mScore + 1;
