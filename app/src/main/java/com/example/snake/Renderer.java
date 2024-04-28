@@ -66,7 +66,7 @@ public class Renderer extends SurfaceView {
 
                 // Draw the message
                 // We will give this an international upgrade soon
-                mCanvas.drawText("Tap To Play!", 200, 700, mPaint);
+                mCanvas.drawText("Tap To Play!", 550, 500, mPaint);
 
                 mPaint.setTextSize(50);
             }
