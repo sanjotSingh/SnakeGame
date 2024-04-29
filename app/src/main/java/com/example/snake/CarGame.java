@@ -107,6 +107,10 @@ public class CarGame extends SurfaceView implements Runnable {
                         mNumBlocksHigh),
                 blockSize,mCar);
 
+        mObstacle = new Obstacle(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize);
 
         mButton = new Button(context,
                 new Point(NUM_BLOCKS_WIDE,
@@ -188,7 +192,7 @@ public class CarGame extends SurfaceView implements Runnable {
             }
 
 
-            mRenderer.draw(mPlainFuel,mObstacle, mCar,mButton, mScore, mPaused);
+            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused);
 
         }
     }
