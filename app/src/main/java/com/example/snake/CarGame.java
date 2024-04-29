@@ -70,7 +70,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private final long OBSTACLE_SPAWN_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
 
     int blockSize;
-    long speed = 10;
+    long speed = 7;
 
     public long getSpeed(){
         return speed;
@@ -261,7 +261,8 @@ public class CarGame extends SurfaceView implements Runnable {
             mScore = mScore + 1;
 
             // Play a sound
-            mAudio.playEatSound(); // When the snake eats the apple
+            mAudio.playEatSound();
+            speed = speed+1;// When the snake eats the apple
         }
 
         // Check collision with obstacle
@@ -269,6 +270,7 @@ public class CarGame extends SurfaceView implements Runnable {
             mObstacle.spawn(); // Respawn obstacle
             // Add method to adjust snake speed or any other actions related to hitting obstacle
             mAudio.playCrashSound();
+            mPaused = true; //Ends the game when it collides with TNT
         }
 
         // Check for game over - Did the snake die?
