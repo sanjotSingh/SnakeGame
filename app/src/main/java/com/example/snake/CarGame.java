@@ -34,7 +34,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private int mCrashID = -1;
 
     // The size in segments of the playable area
-    private final int NUM_BLOCKS_WIDE = 40;
+    private final int NUM_BLOCKS_WIDE = 20;
     private int mNumBlocksHigh;
 
     // How many points does the player have
@@ -47,7 +47,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private Renderer mRenderer;
     private Car mCar;
     // And an apple
-    private Fuel mFuel;
+    private PlainFuel mPlainFuel;
 
     private Obstacle mObstacle;
 
@@ -70,6 +70,14 @@ public class CarGame extends SurfaceView implements Runnable {
     private final long OBSTACLE_SPAWN_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
 
     int blockSize;
+    long speed = 10;
+
+    public long getSpeed(){
+        return speed;
+    }
+    public void setSpeed(long speed){
+        this.speed = speed;
+    }
     // This is the constructor method that gets called
     // from CarActivity
     public CarGame(Context context, Point size) {
@@ -88,21 +96,17 @@ public class CarGame extends SurfaceView implements Runnable {
         setUpSound(context);
 
 
-
-        // Call the constructors of our three game objects
-        mFuel = new Fuel(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
-        mObstacle = new Obstacle(context,
-                new Point(NUM_BLOCKS_WIDE,
-                        mNumBlocksHigh),
-                blockSize);
-
         mCar = new Car(context,
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
+
+        // Call the constructors of our three game objects
+        mPlainFuel = new PlainFuel(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize,mCar);
+
 
         mButton = new Button(context,
                 new Point(NUM_BLOCKS_WIDE,
@@ -159,7 +163,7 @@ public class CarGame extends SurfaceView implements Runnable {
         mCar.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
 
         // Get the apple ready for dinner
-        mFuel.spawn();
+        mPlainFuel.spawn();
 
         mObstacle.spawn();
 
@@ -183,7 +187,9 @@ public class CarGame extends SurfaceView implements Runnable {
                 }
             }
 
-            mRenderer.draw(mFuel, mObstacle, mCar, mButton, mScore, mPaused);
+
+            mRenderer.draw(mPlainFuel,mObstacle, mCar,mButton, mScore, mPaused);
+
         }
     }
 
@@ -191,8 +197,7 @@ public class CarGame extends SurfaceView implements Runnable {
     // Check to see if it is time for an update
     public boolean updateRequired() {
 
-        // Run at 10 frames per second
-        final long TARGET_FPS = 10;
+        // Snake speed
         // There are 1000 milliseconds in a second
         final long MILLIS_PER_SECOND = 1000;
 
@@ -202,7 +207,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
             // Setup when the next update will be triggered
             mNextFrameTime =System.currentTimeMillis()
-                    + MILLIS_PER_SECOND / TARGET_FPS;
+                    + MILLIS_PER_SECOND / speed;
 
             // Return true so that the update and draw
             // methods are executed
@@ -237,19 +242,11 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the snake
         mCar.move();
 
-        // Spawn obstacles if required
-        if (obstacleSpawnRequired()) {
-            mObstacle.spawn();
-        }
-
-        // Move the obstacle continuously
-        updateObstaclePosition();
-
-        // Check collision with fuel
-        if(mCar.checkDinner(mFuel.getLocation())){
+        // Did the head of the snake eat the apple?
+        if(mCar.checkNitro(mPlainFuel.getLocation())){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
-            mFuel.spawn();
+            mPlainFuel.spawn();
 
             // Add to  mScore
             mScore = mScore + 1;
@@ -259,7 +256,7 @@ public class CarGame extends SurfaceView implements Runnable {
         }
 
         // Check collision with obstacle
-        if (mCar.checkDinner(mObstacle.getLocation())) {
+        if (mCar.checkNitro(mObstacle.getLocation())) {
             mObstacle.spawn(); // Respawn obstacle
             // Add method to adjust snake speed or any other actions related to hitting obstacle
             mAudio.playCrashSound();
