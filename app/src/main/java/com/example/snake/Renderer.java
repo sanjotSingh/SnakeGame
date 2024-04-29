@@ -30,7 +30,7 @@ public class Renderer extends SurfaceView {
 
 
 
-    public void draw(Fuel mFuel, Car mCar, Button mButton, int mScore, Boolean mPaused) {
+    public void draw(Fuel mFuel, Obstacle mObstacle, Car mCar, Button mButton, int mScore, Boolean mPaused) {
         // Get a lock on the mCanvas
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
@@ -54,6 +54,7 @@ public class Renderer extends SurfaceView {
 
             // Draw the fuel, the snake and the pause button
             mFuel.draw(mCanvas, mPaint);
+            mObstacle.draw(mCanvas, mPaint);
             mCar.draw(mCanvas, mPaint);
             mButton.draw(mCanvas, mPaint);
 

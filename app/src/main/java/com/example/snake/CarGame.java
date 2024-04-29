@@ -49,6 +49,8 @@ public class CarGame extends SurfaceView implements Runnable {
     // And an apple
     private Fuel mFuel;
 
+    private Obstacle mObstacle;
+
     private Button mButton;
 
     /*
@@ -63,6 +65,13 @@ public class CarGame extends SurfaceView implements Runnable {
     int blockSize;
     // This is the constructor method that gets called
     // from CarActivity
+
+    // Add a new field for the next obstacle move time
+    private long mNextObstacleSpawnTime;
+
+    // Define a constant for the interval between each obstacle position update
+    private final long OBSTACLE_MOVE_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
+
     public CarGame(Context context, Point size) {
         super(context);
 
@@ -82,12 +91,15 @@ public class CarGame extends SurfaceView implements Runnable {
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
+        mObstacle = new Obstacle(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize);
 
         mCar = new Car(context,
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize);
-
 
         mButton = new Button(context,
                 new Point(NUM_BLOCKS_WIDE,
@@ -146,6 +158,9 @@ public class CarGame extends SurfaceView implements Runnable {
         // Get the apple ready for dinner
         mFuel.spawn();
 
+        mObstacle.spawn();
+
+
         // Reset the mScore
         mScore = 0;
 
@@ -165,7 +180,11 @@ public class CarGame extends SurfaceView implements Runnable {
                 }
             }
 
+<<<<<<< Updated upstream
             mRenderer.draw(mFuel, mCar,mButton, mScore, mPaused);
+=======
+            mRenderer.draw(mApple, mObstacle, mCar, mButton, mScore, mPaused);
+>>>>>>> Stashed changes
         }
     }
 
@@ -194,6 +213,22 @@ public class CarGame extends SurfaceView implements Runnable {
         return false;
     }
 
+    // Check to see if it is time to spawn a new obstacle
+    public boolean obstacleSpawnRequired() {
+        final long OBSTACLE_SPAWN_INTERVAL = 5000; // Adjust the interval as needed (in milliseconds)
+
+        // Check if the current time exceeds the next obstacle spawn time
+        if (System.currentTimeMillis() >= mNextObstacleSpawnTime) {
+            // It's time to spawn a new obstacle
+            // Update the next obstacle spawn time
+            mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_SPAWN_INTERVAL;
+            return true;
+        }
+
+        // It's not yet time to spawn a new obstacle
+        return false;
+    }
+
 
 
     // Update all the game objects
@@ -202,8 +237,21 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the snake
         mCar.move();
 
+<<<<<<< Updated upstream
         // Did the head of the snake eat the apple?
         if(mCar.checkDinner(mFuel.getLocation())){
+=======
+        // Spawn obstacles if required
+        if (obstacleSpawnRequired()) {
+            mObstacle.spawn();
+        }
+
+        // Move the obstacle continuously
+        updateObstaclePosition();
+
+        // Check collision with apple
+        if(mCar.checkDinner(mApple.getLocation())){
+>>>>>>> Stashed changes
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
             mFuel.spawn();
@@ -215,19 +263,34 @@ public class CarGame extends SurfaceView implements Runnable {
             mAudio.playEatSound(); // When the snake eats the apple
         }
 
-        // Did the snake die?
+        // Check collision with obstacle
+        if (mCar.checkDinner(mObstacle.getLocation())) {
+            // Reduce the size of the car/snake
+            mCar.reduceSize();
+            // Play crash sound
+            mAudio.playCrashSound();
+            // Respawn obstacle
+            mObstacle.spawn();
+        }
+
+        // Check for game over - Did the snake die?
         if (mCar.detectDeath()) {
             // Pause the game ready to start again
             mAudio.playCrashSound(); // When the snake crashes
-
             mPaused =true;
         }
 
     }
 
 
-    // Do all the drawing
-
+    // Update the position of the obstacle continuously
+    private void updateObstaclePosition() {
+        // Move the obstacle to a random position
+        if (System.currentTimeMillis() >= mNextObstacleSpawnTime) {
+            mObstacle.spawn(); // Respawn obstacle at a random position
+            mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_MOVE_INTERVAL;
+        }
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {

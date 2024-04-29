@@ -43,6 +43,7 @@ class Car implements Drawable{
     // A bitmap for the body
     private Bitmap mBitmapBody;
 
+    private int size; // Assuming the size of the car/snake is represented by an integer
 
     Car(Context context, Point mr, int ss) {
 
@@ -193,6 +194,15 @@ class Car implements Drawable{
             return true;
         }
         return false;
+    }
+
+
+    // Method to reduce the size of the car/snake
+    public void reduceSize() {
+        if (segmentLocations.size() > 1) {
+            // Remove the last segment from the segmentLocations ArrayList
+            segmentLocations.remove(segmentLocations.size() - 1);
+        }
     }
 
 
