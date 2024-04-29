@@ -62,18 +62,21 @@ public class CarGame extends SurfaceView implements Runnable {
     private boolean isPaused = true;
     private final int buttonWidth = 200; // Adjust button width as needed
     private final int buttonHeight = 100; // Adjust button height as needed
-    int blockSize;
-    // This is the constructor method that gets called
-    // from CarActivity
 
     // Add a new field for the next obstacle move time
     private long mNextObstacleSpawnTime;
 
     // Define a constant for the interval between each obstacle position update
-    private final long OBSTACLE_MOVE_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
+    private final long OBSTACLE_SPAWN_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
 
+    int blockSize;
+    // This is the constructor method that gets called
+    // from CarActivity
     public CarGame(Context context, Point size) {
         super(context);
+
+        // Initialize mNextObstacleMoveTime with current time + OBSTACLE_MOVE_INTERVAL
+        mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_SPAWN_INTERVAL;
 
         mAudio = new Audio(context);
 
@@ -180,11 +183,7 @@ public class CarGame extends SurfaceView implements Runnable {
                 }
             }
 
-<<<<<<< Updated upstream
-            mRenderer.draw(mFuel, mCar,mButton, mScore, mPaused);
-=======
-            mRenderer.draw(mApple, mObstacle, mCar, mButton, mScore, mPaused);
->>>>>>> Stashed changes
+            mRenderer.draw(mFuel, mObstacle, mCar, mButton, mScore, mPaused);
         }
     }
 
@@ -213,6 +212,7 @@ public class CarGame extends SurfaceView implements Runnable {
         return false;
     }
 
+
     // Check to see if it is time to spawn a new obstacle
     public boolean obstacleSpawnRequired() {
         final long OBSTACLE_SPAWN_INTERVAL = 5000; // Adjust the interval as needed (in milliseconds)
@@ -237,10 +237,6 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the snake
         mCar.move();
 
-<<<<<<< Updated upstream
-        // Did the head of the snake eat the apple?
-        if(mCar.checkDinner(mFuel.getLocation())){
-=======
         // Spawn obstacles if required
         if (obstacleSpawnRequired()) {
             mObstacle.spawn();
@@ -249,9 +245,8 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the obstacle continuously
         updateObstaclePosition();
 
-        // Check collision with apple
-        if(mCar.checkDinner(mApple.getLocation())){
->>>>>>> Stashed changes
+        // Check collision with fuel
+        if(mCar.checkDinner(mFuel.getLocation())){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
             mFuel.spawn();
@@ -265,19 +260,16 @@ public class CarGame extends SurfaceView implements Runnable {
 
         // Check collision with obstacle
         if (mCar.checkDinner(mObstacle.getLocation())) {
-            // Reduce the size of the car/snake
-            mCar.reduceSize();
-            // Play crash sound
+            mObstacle.spawn(); // Respawn obstacle
+            // Add method to adjust snake speed or any other actions related to hitting obstacle
             mAudio.playCrashSound();
-            // Respawn obstacle
-            mObstacle.spawn();
         }
 
         // Check for game over - Did the snake die?
         if (mCar.detectDeath()) {
             // Pause the game ready to start again
             mAudio.playCrashSound(); // When the snake crashes
-            mPaused =true;
+            mPaused = true;
         }
 
     }
@@ -288,9 +280,10 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the obstacle to a random position
         if (System.currentTimeMillis() >= mNextObstacleSpawnTime) {
             mObstacle.spawn(); // Respawn obstacle at a random position
-            mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_MOVE_INTERVAL;
+            mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_SPAWN_INTERVAL;
         }
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -315,7 +308,7 @@ public class CarGame extends SurfaceView implements Runnable {
                     }
                     return true; // Consume touch event
                 }
-                    // Let the Car class handle the input
+                // Let the Car class handle the input
                 mCar.switchHeading(motionEvent);
 
                 break;
