@@ -60,6 +60,8 @@ public class CarGame extends SurfaceView implements Runnable {
 
 
     private boolean isPaused = true;
+    private booelean gameOver = false;
+
     private final int buttonWidth = 200; // Adjust button width as needed
     private final int buttonHeight = 100; // Adjust button height as needed
 
@@ -162,6 +164,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
     // Called to start a new game
     public void newGame() {
+        gameOver = false;
 
         // reset the snake
         mCar.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
@@ -192,7 +195,7 @@ public class CarGame extends SurfaceView implements Runnable {
             }
 
 
-            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused);
+            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused, gameOver);
 
         }
     }
@@ -270,13 +273,15 @@ public class CarGame extends SurfaceView implements Runnable {
             mObstacle.spawn(); // Respawn obstacle
             // Add method to adjust snake speed or any other actions related to hitting obstacle
             mAudio.playCrashSound();
-            mPaused = true; //Ends the game when it collides with TNT
+            gameOver = true;
+            mPaused = true;
         }
 
         // Check for game over - Did the snake die?
         if (mCar.detectDeath()) {
             // Pause the game ready to start again
             mAudio.playCrashSound(); // When the snake crashes
+            gameOver = true;
             mPaused = true;
         }
 

@@ -61,7 +61,24 @@ public class Renderer extends SurfaceView {
             mButton.draw(mCanvas, mPaint);
 
             // Draw some text while paused
-            if(mPaused){
+
+            if (gameOver) {
+                // Set the size and color of the game over text
+                mPaint.setColor(Color.argb(255, 0, 0, 0));
+                mPaint.setTextSize(250);
+
+                // Draw the game over message
+                mCanvas.drawText("Game Over", 550, 500, mPaint);
+
+                // Draw the final score
+                mPaint.setTextSize(50);
+                mCanvas.drawText("Final Score: " + mScore, 550, 600, mPaint);
+
+                // Draw restart and return options
+                mPaint.setTextSize(50);
+                mCanvas.drawText("Restart", 550, 700, mPaint);
+                mCanvas.drawText("Return to Start", 550, 800, mPaint);
+            } else if(mPaused){
 
                 // Set the size and color of the pause text
                 mPaint.setColor(Color.argb(255, 0, 0, 0));
@@ -73,7 +90,6 @@ public class Renderer extends SurfaceView {
 
                 mPaint.setTextSize(50);
             }
-
 
             // Unlock the mCanvas and reveal the graphics for this frame
             mSurfaceHolder.unlockCanvasAndPost(mCanvas);
