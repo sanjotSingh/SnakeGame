@@ -246,6 +246,11 @@ public class CarGame extends SurfaceView implements Runnable {
         // Move the snake
         mCar.move();
 
+        // Spawn obstacles if required
+        if (obstacleSpawnRequired()) {
+            mObstacle.spawn();
+        }
+
         // Did the head of the snake eat the apple?
         if(mCar.checkNitro(mPlainFuel.getLocation())){
             // This reminds me of Edge of Tomorrow.

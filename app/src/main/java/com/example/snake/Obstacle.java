@@ -26,7 +26,7 @@ public class Obstacle extends GameObject implements Drawable {
         location.x = -10;
 
         // Load the image to the bitmap
-        mBitmapObstacle = BitmapFactory.decodeResource(context.getResources(), R.drawable.obstacle);
+        mBitmapObstacle = BitmapFactory.decodeResource(context.getResources(), R.drawable.tnt);
 
         // Resize the bitmap
         mBitmapObstacle = Bitmap.createScaledBitmap(mBitmapObstacle, s, s, false);
