@@ -14,9 +14,19 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CarGame extends SurfaceView implements Runnable {
+
+    // Previous high score
+    private int mHighScore = 0;
+    private static final String HIGH_SCORE_FILE = "high_score.txt";
+
 
     // Objects for the game loop/thread
     private Thread mThread = null;
@@ -60,7 +70,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
 
     private boolean isPaused = true;
-    private booelean gameOver = false;
+    private boolean gameOver = false;
 
     private final int buttonWidth = 200; // Adjust button width as needed
     private final int buttonHeight = 100; // Adjust button height as needed
@@ -72,7 +82,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private final long OBSTACLE_SPAWN_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
 
     int blockSize;
-    long speed = 7;
+    long speed = 3;
 
     public long getSpeed(){
         return speed;
@@ -180,6 +190,8 @@ public class CarGame extends SurfaceView implements Runnable {
 
         // Setup mNextFrameTime so an update can triggered
         mNextFrameTime = System.currentTimeMillis();
+        // Load high score
+        loadHighScore();
     }
 
 
@@ -195,7 +207,7 @@ public class CarGame extends SurfaceView implements Runnable {
             }
 
 
-            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused, gameOver);
+            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused, gameOver,mHighScore);
 
         }
     }
@@ -265,7 +277,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
             // Play a sound
             mAudio.playEatSound();
-            speed = speed+1;// When the snake eats the apple
+            speed = (long)(speed+0.1);// When the snake eats the apple
         }
 
         // Check collision with obstacle
@@ -275,6 +287,7 @@ public class CarGame extends SurfaceView implements Runnable {
             mAudio.playCrashSound();
             gameOver = true;
             mPaused = true;
+            updateHighScore();
         }
 
         // Check for game over - Did the snake die?
@@ -283,6 +296,7 @@ public class CarGame extends SurfaceView implements Runnable {
             mAudio.playCrashSound(); // When the snake crashes
             gameOver = true;
             mPaused = true;
+            updateHighScore();
         }
 
     }
@@ -361,5 +375,38 @@ public class CarGame extends SurfaceView implements Runnable {
 
     public boolean isPaused() {
         return mPaused;
+    }
+
+    // Load the high score from file
+    private void loadHighScore() {
+        File file = new File( HIGH_SCORE_FILE);
+        if (file.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String scoreStr = reader.readLine();
+                if (scoreStr != null && !scoreStr.isEmpty()) {
+                    mHighScore = Integer.parseInt(scoreStr);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Save the high score to file
+    private void saveHighScore() {
+        File file = new File( HIGH_SCORE_FILE);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(Integer.toString(mHighScore));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Called when the game ends to update high score if necessary
+    private void updateHighScore() {
+        if (mScore > mHighScore) {
+            mHighScore = mScore;
+            saveHighScore();
+        }
     }
 }

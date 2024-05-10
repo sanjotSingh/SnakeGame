@@ -31,7 +31,7 @@ public class Renderer extends SurfaceView {
 
 
 
-    public void draw(PlainFuel mPlainFuel,Obstacle mObstacle, Car mCar, Button mButton, int mScore, Boolean mPaused) {
+    public void draw(PlainFuel mPlainFuel,Obstacle mObstacle, Car mCar, Button mButton, int mScore, Boolean mPaused, Boolean gameOver,int mHighScore) {
         // Get a lock on the mCanvas
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
@@ -73,11 +73,11 @@ public class Renderer extends SurfaceView {
                 // Draw the final score
                 mPaint.setTextSize(50);
                 mCanvas.drawText("Final Score: " + mScore, 550, 600, mPaint);
-
+                mCanvas.drawText("High Score: " + mHighScore, 550, 800, mPaint);
                 // Draw restart and return options
                 mPaint.setTextSize(50);
                 mCanvas.drawText("Restart", 550, 700, mPaint);
-                mCanvas.drawText("Return to Start", 550, 800, mPaint);
+                mCanvas.drawText("Return to Start", 550, 1000, mPaint);
             } else if(mPaused){
 
                 // Set the size and color of the pause text
