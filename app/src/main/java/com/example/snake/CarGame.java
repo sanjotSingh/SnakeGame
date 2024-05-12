@@ -1,15 +1,8 @@
 package com.example.snake;
 
-
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -82,7 +75,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private final long OBSTACLE_SPAWN_INTERVAL = 3000; // Adjust the interval as needed (in milliseconds)
 
     int blockSize;
-    long speed = 3;
+    long speed = 6;
 
     public long getSpeed(){
         return speed;
@@ -267,7 +260,7 @@ public class CarGame extends SurfaceView implements Runnable {
             mObstacle.spawn();
         }
 
-        // Did the head of the snake eat the apple?
+        // Did the head of the car consume the fuel?
         if(mCar.checkNitro(mPlainFuel.getLocation())){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
@@ -284,10 +277,9 @@ public class CarGame extends SurfaceView implements Runnable {
         // Check collision with obstacle
         if (mCar.checkNitro(mObstacle.getLocation())) {
             mObstacle.spawn(); // Respawn obstacle
-            // Add method to adjust snake speed or any other actions related to hitting obstacle
+            // Decrease the score
+            mScore = Math.max(0, mScore - 1); // Ensure score doesn't go below 0
             mAudio.playCrashSound();
-            gameOver = true;
-            mPaused = true;
             updateHighScore();
         }
 

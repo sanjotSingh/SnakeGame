@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import java.util.Random;
 
-public class Obstacle extends GameObject implements Drawable {
+public class Obstacle {
     private Point location = new Point(); // Location of the obstacle
     private int mSize; // Size of each block
     private Point mSpawnRange;
@@ -15,9 +15,8 @@ public class Obstacle extends GameObject implements Drawable {
     // An image to represent the obstacle
     private Bitmap mBitmapObstacle;
 
-    Obstacle(Context context, Point sr, int s){
+    public Obstacle(Context context, Point sr, int s){
         super();
-
         // Make a note of the passed in spawn range
         mSpawnRange = sr;
         // Make a note of the size of an apple
@@ -33,7 +32,7 @@ public class Obstacle extends GameObject implements Drawable {
     }
 
     // This is called every time an apple is eaten
-    void spawn(){
+    public void spawn(){
         // Choose two random values and place the apple
         Random random = new Random();
         location.x = random.nextInt(mSpawnRange.x) + 1;
