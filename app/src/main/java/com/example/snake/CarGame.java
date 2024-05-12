@@ -39,9 +39,9 @@ public class CarGame extends SurfaceView implements Runnable {
     private Audio mAudio;
 
     // for playing sound effects
-    private SoundPool mSP;
-    private int mEat_ID = -1;
-    private int mCrashID = -1;
+    // private SoundPool mSP;
+    // private int mEat_ID = -1;
+    // private int mCrashID = -1;
 
     // The size in segments of the playable area
     private final int NUM_BLOCKS_WIDE = 20;
@@ -105,7 +105,7 @@ public class CarGame extends SurfaceView implements Runnable {
         // How many blocks of the same size will fit into the height
         mNumBlocksHigh = size.y / blockSize;
 
-        setUpSound(context);
+        // setUpSound(context);
 
 
         mCar = new Car(context,
@@ -141,7 +141,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
     }
 
-    public void setUpSound(Context context){
+    /* public void setUpSound(Context context){
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -171,6 +171,7 @@ public class CarGame extends SurfaceView implements Runnable {
             // Error
         }
     }
+    */
 
     // Called to start a new game
     public void newGame() {

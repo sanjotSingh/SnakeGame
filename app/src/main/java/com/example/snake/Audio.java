@@ -9,7 +9,26 @@ import android.media.SoundPool;
 import android.os.Build;
 import java.io.IOException;
 public class Audio {
-    private SoundPool mSP;
+
+    private AudioContext audioContext;
+
+    
+    public Audio(Context context) {
+        audioContext = new AudioContext(context);
+    }
+    public void setAudioPattern(AudioPattern audioPattern) {
+        audioContext.setAudioPattern(audioPattern);
+    }
+
+    public void playEatSound() {
+        audioContext.playEatSound();
+    }
+    public void playCrashSound() {
+        audioContext.playCrashSound();
+    }
+
+}
+  /*  private SoundPool mSP;
     private int mEat_ID = -1;
     private int mCrashID = -1;
 
@@ -55,3 +74,4 @@ public class Audio {
         mSP.play(mCrashID, 1, 1, 0, 0, 1);
     }
 }
+*/
