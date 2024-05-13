@@ -33,7 +33,7 @@ public class SoundPoolStrategy implements AudioPattern{
             AssetFileDescriptor descriptor;
 
             //Prepare the sounds in memory
-            descriptor = assetManager.openFd("car_gear_shift_24.ogg");
+            descriptor = assetManager.openFd("gulp.ogg");
             mEat_Id = mSP.load(descriptor, 0);
 
             descriptor = assetManager.openFd("explosions_4.ogg");
