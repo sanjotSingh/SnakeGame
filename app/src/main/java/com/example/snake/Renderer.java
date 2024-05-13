@@ -69,15 +69,13 @@ public class Renderer extends SurfaceView {
                 mPaint.setTextSize(250);
 
                 // Draw the game over message
-                mCanvas.drawText("Game Over", 550, 500, mPaint);
+                mCanvas.drawText("Game Over", 550, 400, mPaint);
 
                 // Draw the final score
                 mPaint.setTextSize(50);
-                mCanvas.drawText("Click anywhere to restart", 550, 600, mPaint);
-                mCanvas.drawText("Final Score: " + mScore, 550, 700, mPaint);
-                mCanvas.drawText("High Score: " + mHighScore, 550, 800, mPaint);
-                // Draw restart and return options
-                mPaint.setTextSize(50);
+                mCanvas.drawText("Click anywhere to restart", 550, 500, mPaint);
+                mCanvas.drawText("Final Score: " + mScore, 550, 600, mPaint);
+                mCanvas.drawText("High Score: " + mHighScore, 550, 700, mPaint);
 
 
             } else if(mPaused){

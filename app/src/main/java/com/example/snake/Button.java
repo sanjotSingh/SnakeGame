@@ -32,25 +32,20 @@ public class Button extends GameObject implements Drawable {
         // Load the image to the bitmap
         pauseButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
         playButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
-        menuButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu10);
         // Resize the bitmap
         buttonBitmap = Bitmap.createScaledBitmap(pauseButtonBitmap, width, height, false);
-        menuButtonBitmap = Bitmap.createScaledBitmap(menuButtonBitmap, width, height, false);
     }
 
     Button(Context context, Point sr, int s, float width, float height){
         super();
         // Load the image to the bitmap
         pauseButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
-        menuButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu10);
         // Resize the bitmap
         buttonBitmap = Bitmap.createScaledBitmap(pauseButtonBitmap, (int)width, (int)height, false);
-        menuButtonBitmap = Bitmap.createScaledBitmap(menuButtonBitmap, (int)width, (int)height, false);
     }
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(buttonBitmap, x, y, paint);
-        canvas.drawBitmap(menuButtonBitmap, a, b, paint);
     }
     public void toggleButtonBitmap(){
 

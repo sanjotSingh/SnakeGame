@@ -40,7 +40,11 @@ public class FastFuel extends FuelDecorator{
         location.y = random.nextInt(mSpawnRange.y - 1) + 1;
     }
 
+    public void deSpawn(){// Choose two random values and place the apple
 
+        location.x = -10;
+        location.y = -10;
+    }
     public void draw(Canvas canvas, Paint paint){
         super.draw(canvas, paint); // Draw the underlying fuel
         canvas.drawBitmap(mBitmapFuel, location.x * mSize, location.y * mSize, paint);
