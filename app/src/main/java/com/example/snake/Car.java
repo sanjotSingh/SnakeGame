@@ -247,6 +247,15 @@ class Car implements Drawable{
     }
 
 
+    // Method to handle collision with obstacle
+    public void handleObstacleCollision() {
+        if (segmentLocations.size() > 1) {
+            // Remove one segment from the body
+            segmentLocations.remove(segmentLocations.size() - 1);
+        }
+    }
+
+
     // Handle changing direction
     void switchHeading(MotionEvent motionEvent) {
 

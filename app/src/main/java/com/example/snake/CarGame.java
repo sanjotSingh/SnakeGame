@@ -277,10 +277,18 @@ public class CarGame extends SurfaceView implements Runnable {
         // Check collision with obstacle
         if (mCar.checkNitro(mObstacle.getLocation())) {
             mObstacle.spawn(); // Respawn obstacle
+            // Call the method to handle collision with obstacle
+            mCar.handleObstacleCollision();
             // Decrease the score
             mScore = Math.max(0, mScore - 1); // Ensure score doesn't go below 0
             mAudio.playCrashSound();
-            updateHighScore();
+            // If the score is zero, end the game
+            if (mScore == 0) {
+                gameOver = true;
+                mPaused = true;
+                updateHighScore();
+                return; // Exit the update method
+            }
         }
 
         // Check for game over - Did the snake die?
