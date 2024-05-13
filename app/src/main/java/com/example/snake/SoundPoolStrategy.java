@@ -33,10 +33,10 @@ public class SoundPoolStrategy implements AudioPattern{
             AssetFileDescriptor descriptor;
 
             //Prepare the sounds in memory
-            descriptor = assetManager.openFd("get_apple.ogg");
+            descriptor = assetManager.openFd("gulp.ogg");
             mEat_Id = mSP.load(descriptor, 0);
 
-            descriptor = assetManager.openFd("snake_death.ogg");
+            descriptor = assetManager.openFd("explosions_4.ogg");
             mCrash_Id = mSP.load(descriptor, 0);
 
         }catch (IOException e){

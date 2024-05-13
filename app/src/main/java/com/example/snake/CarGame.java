@@ -31,10 +31,6 @@ public class CarGame extends SurfaceView implements Runnable {
 
     private Audio mAudio;
 
-    // for playing sound effects
-    // private SoundPool mSP;
-    // private int mEat_ID = -1;
-    // private int mCrashID = -1;
 
     // The size in segments of the playable area
     private final int NUM_BLOCKS_WIDE = 20;
@@ -98,8 +94,6 @@ public class CarGame extends SurfaceView implements Runnable {
         // How many blocks of the same size will fit into the height
         mNumBlocksHigh = (size.y / blockSize)-1;
 
-        // setUpSound(context);
-
 
         mCar = new Car(context,
                 new Point(NUM_BLOCKS_WIDE,
@@ -134,37 +128,6 @@ public class CarGame extends SurfaceView implements Runnable {
 
     }
 
-    /* public void setUpSound(Context context){
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-
-            mSP = new SoundPool.Builder()
-                    .setMaxStreams(5)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        } else {
-            mSP = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        }
-        try {
-            AssetManager assetManager = context.getAssets();
-            AssetFileDescriptor descriptor;
-
-            // Prepare the sounds in memory
-            descriptor = assetManager.openFd("get_apple.ogg");
-            mEat_ID = mSP.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("snake_death.ogg");
-            mCrashID = mSP.load(descriptor, 0);
-
-        } catch (IOException e) {
-            // Error
-        }
-    }
-    */
 
     // Called to start a new game
     public void newGame() {
