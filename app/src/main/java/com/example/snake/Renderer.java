@@ -38,10 +38,10 @@ public class Renderer extends SurfaceView {
 
 
             // Set Background color
-            mCanvas.drawColor(Color.argb(255,122, 89, 255));
+            mCanvas.drawColor(Color.argb(255,0, 0, 0));
 
             // Set the size and color of the mPaint for the text
-            mPaint.setColor(Color.argb(255, 0, 0, 0));
+            mPaint.setColor(Color.argb(255, 255, 255, 255));
             mPaint.setTextSize(50);
 
             //set Font
@@ -64,7 +64,7 @@ public class Renderer extends SurfaceView {
 
             if (gameOver) {
                 // Set the size and color of the game over text
-                mPaint.setColor(Color.argb(255, 0, 0, 0));
+                mPaint.setColor(Color.argb(255, 255, 255, 255));
                 mPaint.setTextSize(250);
 
                 // Draw the game over message
@@ -72,16 +72,17 @@ public class Renderer extends SurfaceView {
 
                 // Draw the final score
                 mPaint.setTextSize(50);
-                mCanvas.drawText("Final Score: " + mScore, 550, 600, mPaint);
+                mCanvas.drawText("Click anywhere to restart", 550, 600, mPaint);
+                mCanvas.drawText("Final Score: " + mScore, 550, 700, mPaint);
                 mCanvas.drawText("High Score: " + mHighScore, 550, 800, mPaint);
                 // Draw restart and return options
                 mPaint.setTextSize(50);
-                mCanvas.drawText("Restart", 550, 700, mPaint);
+
                 mCanvas.drawText("Return to Start", 550, 1000, mPaint);
             } else if(mPaused){
 
                 // Set the size and color of the pause text
-                mPaint.setColor(Color.argb(255, 0, 0, 0));
+                mPaint.setColor(Color.argb(255, 255, 255, 255));
                 mPaint.setTextSize(250);
 
                 // Draw the message
