@@ -252,6 +252,7 @@ class Car implements Drawable{
         if (segmentLocations.size() > 1) {
             // Remove one segment from the body
             segmentLocations.remove(segmentLocations.size() - 1);
+            segmentLocations.remove(segmentLocations.size() - 1);
         }
     }
 

@@ -38,7 +38,7 @@ public class Renderer extends SurfaceView {
 
 
             // Set Background color
-            mCanvas.drawColor(Color.argb(255,100,200,100));
+            mCanvas.drawColor(Color.argb(255,122, 89, 255));
 
             // Set the size and color of the mPaint for the text
             mPaint.setColor(Color.argb(255, 0, 0, 0));

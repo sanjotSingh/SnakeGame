@@ -37,7 +37,7 @@ public class CarGame extends SurfaceView implements Runnable {
     // private int mCrashID = -1;
 
     // The size in segments of the playable area
-    private final int NUM_BLOCKS_WIDE = 20;
+    private final int NUM_BLOCKS_WIDE = 39;
     private int mNumBlocksHigh;
 
     // How many points does the player have
@@ -94,9 +94,9 @@ public class CarGame extends SurfaceView implements Runnable {
         mAudio = new Audio(context);
 
         // Work out how many pixels each block is
-        blockSize = size.x / NUM_BLOCKS_WIDE;
+        blockSize = (size.x) / NUM_BLOCKS_WIDE;
         // How many blocks of the same size will fit into the height
-        mNumBlocksHigh = size.y / blockSize;
+        mNumBlocksHigh = (size.y / blockSize)-2;
 
         // setUpSound(context);
 
