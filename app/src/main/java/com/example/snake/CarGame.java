@@ -240,16 +240,21 @@ public class CarGame extends SurfaceView implements Runnable {
             // One day the apple will be ready!
             fuelInt =random.nextInt(10 ) + 1;
             if(fuelInt<=5)//10%chance
+            {
                 mFastFuel.spawn();
-            else
+                speed = speed + 1;// When the snake eats the apple
+            }
+            else {
                 mPlainFuel.spawn();
+                speed = (long)(speed + 0.5);// When the snake eats the apple
+            }
 
             // Add to  mScore
             mScore = mScore + 1;
 
             // Play a sound
             mAudio.playEatSound();
-            speed = speed+1;// When the snake eats the apple
+
         }
 
         // Check collision with obstacle
