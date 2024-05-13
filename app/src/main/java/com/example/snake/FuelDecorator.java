@@ -5,25 +5,25 @@ import android.graphics.Paint;
 import android.graphics.Bitmap;
 
 
-abstract class FuelDecorator implements Fuel{
-    protected Fuel decoratedFuel;
-    public FuelDecorator(Fuel decoratedFuel){
+abstract class FuelDecorator implements Fuel,Drawable{
+    protected Fuel tempFuel;
+    public FuelDecorator(Fuel newFuel){
 
-        this.decoratedFuel = decoratedFuel;
+        this.tempFuel = newFuel;
 
     }
 
     public void spawn(){// Choose two random values and place the apple
-        decoratedFuel.spawn();
+        tempFuel.spawn();
     }
 
 
     public void draw(Canvas canvas, Paint paint){
-        decoratedFuel.draw(canvas, paint);
+        tempFuel.draw(canvas, paint);
 
     }
     @Override
     public void setBitmap(Bitmap bitmap) {
-        decoratedFuel.setBitmap(bitmap);
+        tempFuel.setBitmap(bitmap);
     }
 }

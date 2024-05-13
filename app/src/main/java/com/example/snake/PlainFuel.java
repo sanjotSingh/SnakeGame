@@ -19,7 +19,7 @@ class PlainFuel extends GameObject implements Drawable, Fuel {
     // to spawn an apple
     private Point mSpawnRange;
     private int mSize;
-
+    Context context = null;
     // An image to represent the apple
     private Bitmap mBitmapFuel;
 
@@ -33,12 +33,12 @@ class PlainFuel extends GameObject implements Drawable, Fuel {
         mSize = s;
         // Hide the apple off-screen until the game starts
         location.x = -10;
-
+        this.context=context;
         // Load the image to the bitmap
         mBitmapFuel = BitmapFactory.decodeResource(context.getResources(), R.drawable.fuel);
 
         // Resize the bitmap
-        mBitmapFuel = Bitmap.createScaledBitmap(mBitmapFuel, s, s, false);
+        mBitmapFuel = Bitmap.createScaledBitmap(mBitmapFuel, mSize, mSize, false);
     }
 
     // This is called every time an apple is eaten
@@ -61,7 +61,8 @@ class PlainFuel extends GameObject implements Drawable, Fuel {
 
     @Override
     public void setBitmap(Bitmap bitmap) {
-        mBitmapFuel = bitmap;
+
+        mBitmapFuel = Bitmap.createScaledBitmap(bitmap, mSize, mSize, false);
     }
 
     // Let CarGame know where the apple is

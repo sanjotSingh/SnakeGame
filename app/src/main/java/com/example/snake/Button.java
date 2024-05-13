@@ -15,8 +15,9 @@ public class Button extends GameObject implements Drawable {
     private Point location = new Point();
 
     // An image to represent the button
+    private Bitmap playButtonBitmap;
+    private Bitmap pauseButtonBitmap;
     private Bitmap buttonBitmap;
-    
     //An image to represent the Menu button
     private Bitmap menuButtonBitmap;
 
@@ -29,26 +30,35 @@ public class Button extends GameObject implements Drawable {
     Button(Context context, Point sr, int s, int width, int height){
         super();
         // Load the image to the bitmap
-        buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
+        pauseButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
+        playButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.play);
         menuButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu10);
         // Resize the bitmap
-        buttonBitmap = Bitmap.createScaledBitmap(buttonBitmap, width, height, false);
+        buttonBitmap = Bitmap.createScaledBitmap(pauseButtonBitmap, width, height, false);
         menuButtonBitmap = Bitmap.createScaledBitmap(menuButtonBitmap, width, height, false);
     }
 
     Button(Context context, Point sr, int s, float width, float height){
         super();
         // Load the image to the bitmap
-        buttonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
+        pauseButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pause);
         menuButtonBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.menu10);
         // Resize the bitmap
-        buttonBitmap = Bitmap.createScaledBitmap(buttonBitmap, (int)width, (int)height, false);
+        buttonBitmap = Bitmap.createScaledBitmap(pauseButtonBitmap, (int)width, (int)height, false);
         menuButtonBitmap = Bitmap.createScaledBitmap(menuButtonBitmap, (int)width, (int)height, false);
     }
     // Draw the apple
     public void draw(Canvas canvas, Paint paint){
         canvas.drawBitmap(buttonBitmap, x, y, paint);
         canvas.drawBitmap(menuButtonBitmap, a, b, paint);
+    }
+    public void toggleButtonBitmap(){
+
+        if (buttonBitmap.sameAs(Bitmap.createScaledBitmap(playButtonBitmap, 200, 100, false) )){
+            buttonBitmap=Bitmap.createScaledBitmap(pauseButtonBitmap, 200, 100, false);
+        }
+        else
+            buttonBitmap=Bitmap.createScaledBitmap(playButtonBitmap, 200, 100, false);
     }
 
 

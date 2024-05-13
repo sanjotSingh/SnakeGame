@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 
 public class CarGame extends SurfaceView implements Runnable {
 
@@ -47,6 +48,7 @@ public class CarGame extends SurfaceView implements Runnable {
     private Car mCar;
     // And an apple
     private PlainFuel mPlainFuel;
+    private FastFuel mFastFuel;
 
     private Obstacle mObstacle;
 
@@ -72,6 +74,8 @@ public class CarGame extends SurfaceView implements Runnable {
 
     int blockSize;
     long speed = 6;
+    Random random = new Random();
+    int fuelInt;
 
     public long getSpeed(){
         return speed;
@@ -105,6 +109,10 @@ public class CarGame extends SurfaceView implements Runnable {
                 new Point(NUM_BLOCKS_WIDE,
                         mNumBlocksHigh),
                 blockSize,mCar);
+        mFastFuel= new FastFuel(new PlainFuel(context,
+                new Point(NUM_BLOCKS_WIDE,
+                        mNumBlocksHigh),
+                blockSize,mCar),context,blockSize,new Point(NUM_BLOCKS_WIDE,mNumBlocksHigh) );
 
         mObstacle = new Obstacle(context,
                 new Point(NUM_BLOCKS_WIDE,
@@ -129,6 +137,7 @@ public class CarGame extends SurfaceView implements Runnable {
     }
 
 
+
     // Called to start a new game
     public void newGame() {
         gameOver = false;
@@ -136,8 +145,9 @@ public class CarGame extends SurfaceView implements Runnable {
         // reset the snake
         mCar.reset(NUM_BLOCKS_WIDE, mNumBlocksHigh);
 
-        // Get the apple ready for dinner
+        // Get the fuel ready for car
         mPlainFuel.spawn();
+
 
         mObstacle.spawn();
 
@@ -165,7 +175,7 @@ public class CarGame extends SurfaceView implements Runnable {
             }
 
 
-            mRenderer.draw(mPlainFuel, mObstacle, mCar,mButton, mScore, mPaused, gameOver,mHighScore);
+            mRenderer.draw(mPlainFuel,mFastFuel, mObstacle, mCar,mButton, mScore, mPaused, gameOver,mHighScore);
 
         }
     }
@@ -225,10 +235,14 @@ public class CarGame extends SurfaceView implements Runnable {
         }
 
         // Did the head of the car consume the fuel?
-        if(mCar.checkNitro(mPlainFuel.getLocation())){
+        if(mCar.checkNitro(mPlainFuel.getLocation()) || mCar.checkNitro(mFastFuel.getLocation()) ){
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
-            mPlainFuel.spawn();
+            fuelInt =random.nextInt(10 ) + 1;
+            if(fuelInt<=5)//10%chance
+                mFastFuel.spawn();
+            else
+                mPlainFuel.spawn();
 
             // Add to  mScore
             mScore = mScore + 1;
@@ -283,7 +297,6 @@ public class CarGame extends SurfaceView implements Runnable {
 
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_UP:
-
                 if (mPaused) {
                     mPaused = false;
                     newGame();
@@ -292,6 +305,7 @@ public class CarGame extends SurfaceView implements Runnable {
                 else if(buttonRect.contains((int) motionEvent.getX(), (int) motionEvent.getY())) {
                     // Toggle game pause state
                     isPaused = !isPaused;
+                    mButton.toggleButtonBitmap();
                     if (isPaused) {
                         // Game paused, perform pause actions
                         pause();

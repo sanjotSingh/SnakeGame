@@ -31,7 +31,7 @@ public class Renderer extends SurfaceView {
 
 
 
-    public void draw(PlainFuel mPlainFuel,Obstacle mObstacle, Car mCar, Button mButton, int mScore, Boolean mPaused, Boolean gameOver,int mHighScore) {
+    public void draw(PlainFuel mPlainFuel,FastFuel mFastFuel,Obstacle mObstacle, Car mCar, Button mButton, int mScore, Boolean mPaused, Boolean gameOver,int mHighScore) {
         // Get a lock on the mCanvas
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
@@ -55,6 +55,7 @@ public class Renderer extends SurfaceView {
 
             // Draw the fuel, the snake and the pause button
             mPlainFuel.draw(mCanvas, mPaint);
+            mFastFuel.draw(mCanvas, mPaint);
             mObstacle.draw(mCanvas, mPaint);
 
             mCar.draw(mCanvas, mPaint);
@@ -78,18 +79,10 @@ public class Renderer extends SurfaceView {
                 // Draw restart and return options
                 mPaint.setTextSize(50);
 
-                mCanvas.drawText("Return to Start", 550, 1000, mPaint);
+
             } else if(mPaused){
 
-                // Set the size and color of the pause text
-                mPaint.setColor(Color.argb(255, 255, 255, 255));
-                mPaint.setTextSize(250);
-
-                // Draw the message
-                // We will give this an international upgrade soon
-                mCanvas.drawText("Tap To Play!", 550, 500, mPaint);
-
-                mPaint.setTextSize(50);
+                renderMenu();
             }
 
             // Unlock the mCanvas and reveal the graphics for this frame
@@ -98,7 +91,18 @@ public class Renderer extends SurfaceView {
     }
 
 
+    public void renderMenu(){
+        // Set the size and color of the pause text
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+        mPaint.setTextSize(250);
 
+        // Draw the message
+        // We will give this an international upgrade soon
+        mCanvas.drawText("Tap To Play!", 100, 500, mPaint);
+
+        mPaint.setTextSize(50);
+
+    }
 
 
 }
