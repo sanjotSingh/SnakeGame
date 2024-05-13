@@ -144,6 +144,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
         // Reset the mScore
         mScore = 0;
+        speed = 6;
 
         // Setup mNextFrameTime so an update can triggered
         mNextFrameTime = System.currentTimeMillis();
@@ -234,7 +235,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
             // Play a sound
             mAudio.playEatSound();
-            speed = (long)(speed+0.1);// When the snake eats the apple
+            speed = speed+1;// When the snake eats the apple
         }
 
         // Check collision with obstacle
@@ -344,7 +345,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
     // Load the high score from file
     private void loadHighScore() {
-        File file = new File( HIGH_SCORE_FILE);
+        File file = new File("high_score.txt");
         if (file.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String scoreStr = reader.readLine();
@@ -359,7 +360,7 @@ public class CarGame extends SurfaceView implements Runnable {
 
     // Save the high score to file
     private void saveHighScore() {
-        File file = new File( HIGH_SCORE_FILE);
+        File file = new File("high_score.txt");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(Integer.toString(mHighScore));
         } catch (IOException e) {
