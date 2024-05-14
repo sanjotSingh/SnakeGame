@@ -287,17 +287,6 @@ public class CarGame extends SurfaceView implements Runnable {
 
     }
 
-
-    // Update the position of the obstacle continuously
-    private void updateObstaclePosition() {
-        // Move the obstacle to a random position
-        if (System.currentTimeMillis() >= mNextObstacleSpawnTime) {
-            mObstacle.spawn(); // Respawn obstacle at a random position
-            mNextObstacleSpawnTime = System.currentTimeMillis() + OBSTACLE_SPAWN_INTERVAL;
-        }
-    }
-
-
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
 
