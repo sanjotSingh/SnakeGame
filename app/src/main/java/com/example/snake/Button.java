@@ -23,8 +23,7 @@ public class Button extends GameObject implements Drawable {
 
     float x = 200;
     float y = 20;
-    float a = 2000;
-    float b = 20;
+
 
     /// Set up the apple in the constructor
     Button(Context context, Point sr, int s, int width, int height){

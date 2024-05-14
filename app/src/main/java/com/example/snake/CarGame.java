@@ -239,7 +239,7 @@ public class CarGame extends SurfaceView implements Runnable {
             // This reminds me of Edge of Tomorrow.
             // One day the apple will be ready!
             fuelInt =random.nextInt(10 ) + 1;
-            if(fuelInt<=3)//10%chance
+            if(fuelInt<=3)//30%chance
             {
                 mFastFuel.spawn();
                 speed = speed + 1;// When the snake eats the apple

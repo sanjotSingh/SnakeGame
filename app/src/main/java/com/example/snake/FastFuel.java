@@ -28,6 +28,8 @@ public class FastFuel extends FuelDecorator{
         super(newFuel);
         this.context = context;
         this.mSize=mSize;
+        location.x = -20;
+        location.y = -20;
         newFuel.setBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.fastfuel), mSize, mSize, false));
         mBitmapFuel = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.fastfuel), mSize, mSize, false);
         mSpawnRange=sr;

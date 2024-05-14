@@ -32,7 +32,8 @@ class PlainFuel extends GameObject implements Drawable, Fuel {
         // Make a note of the size of an apple
         mSize = s;
         // Hide the apple off-screen until the game starts
-        location.x = -10;
+        location.x = -20;
+        location.y=-20;
         this.context=context;
         // Load the image to the bitmap
         mBitmapFuel = BitmapFactory.decodeResource(context.getResources(), R.drawable.fuel);
