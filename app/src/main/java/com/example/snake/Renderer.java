@@ -6,6 +6,9 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 
 public class Renderer extends SurfaceView {
     private CarGame carGame;
@@ -64,6 +67,13 @@ public class Renderer extends SurfaceView {
             // Draw some text while paused
 
             if (gameOver) {
+
+                // Load the background image (assuming you have an image named "backgroundImage")
+                Bitmap backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.accident);
+
+                // Draw the background image
+                mCanvas.drawBitmap(backgroundImage, 0, 0, mPaint);
+
                 // Set the size and color of the game over text
                 mPaint.setColor(Color.argb(255, 255, 255, 255));
                 mPaint.setTextSize(250);
@@ -90,6 +100,14 @@ public class Renderer extends SurfaceView {
 
 
     public void renderMenu(){
+
+        // Load the background image (assuming you have an image named "backgroundImage")
+        Bitmap backgroundImage = BitmapFactory.decodeResource(getResources(), R.drawable.steamengine);
+
+        // Draw the background image
+        mCanvas.drawBitmap(backgroundImage, 0, 0, mPaint);
+
+
         // Set the size and color of the pause text
         mPaint.setColor(Color.argb(255, 255, 255, 255));
         mPaint.setTextSize(250);
